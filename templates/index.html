@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="text-center mb-5">
+    <h1>Discography</h1>
+    <p class="lead">All albums.</p>
+</div>
+<div class="row">
+    {% for album in albums %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            {% if album.image_url %}
+            <img src="{{ album.image_url }}" class="card-img-top" alt="{{ album.title }}" style="height: 200px; object-fit: cover;">
+            {% else %}
+            <div class="bg-secondary text-white d-flex align-items-center justify-content-center" style="height: 200px;">No photo(</div>
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ album.title }} ({{ album.year }})</h5>
+                <p class="card-text">{{ album.description[:100] }}...</p>
+                <a href="{{ url_for('view_album', album_id=album.id) }}" class="btn btn-primary">More...</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
